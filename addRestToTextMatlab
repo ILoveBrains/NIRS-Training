@@ -1,0 +1,17 @@
+% Check if file already has a rest condition at the starting
+%set up currently in order (timeFrame, trigger, ?duration?)
+function addRest()
+  %Set path to folder on your current computer
+  fpath =  '/Users/user/Downloads/Summer Training';
+  cd(fpath)
+  %make list of folders in directory
+  paList = dir;
+  %change the list to cells
+  paList = {paList(:).name};
+  %make a list of only the numerical folder names
+  tmp = str2double(paList);
+  idx = isnan(tmp);
+  paList = tmp(~idx);
+
+  disp(paList)
+  %a = sprintf('%d %d %d', 0)
