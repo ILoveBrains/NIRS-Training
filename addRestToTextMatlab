@@ -1,10 +1,24 @@
 % Check if file already has a rest condition at the starting
 %set up currently in order (timeFrame, trigger, ?duration?)
-function addRest(fpath)
+%% DEPENDENCY ON rdir
+function addRest(fPath)
   %Set path to folder on your current computer
-  fPath =  '/Users/user/Downloads/Summer Training';
-  %finds all the .evt files
-  evtFiles = rdir(fullfile(fpath,'*/','**/','*/','*.evt'))
-  evtFiles = {evtFiles(:).name};
-
+  if isempty(fPath)
+    fPath =  '/Users/user/Downloads/Summer Training';
+  end
+  %finds all the .evt file locations
+  evtFilePath = rdir(fullfile(fpath,'*/','**/','*/','*.evt'))
+  %Only keeps the path to the evt files
+  evtFilePath = {evtFilePath(:).name};
+  %cycle through the EVT files checking for rest conditions
+  for n = 1:length(evtFilePath)
+    curEVT = load(char(evtFilePath(n)));
+    timeIdx = curEVT(:,1)
+    %get the first binary event code
+    fstEVT = curEVT(1,:)
+    fstEVT = strcat(num2str(fstEVT(1),num2str(fstEVT(2),num2str(fstEVT(3),num2str(fstEVT(4))
+    %% What was the timing we decided to add?
+    %% What is the event code?
+    if curEVT(1)
   %a = sprintf('%d %d %d', 0)
+    %fprintf the rest we desided on, then the rest of the file after.

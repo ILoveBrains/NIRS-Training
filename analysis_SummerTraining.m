@@ -14,9 +14,9 @@ raw  = nirs.io.loadDirectory( [root filesep 'Summer Training'], {'subject', 'sca
 j = nirs.modules.KeepStims();
  j.listOfStims = { 'channel_1', 'channel_2', 'channel_3', ...
     'channel_5', 'channel_6', 'channel_7', 'channel_9', 'channel_10', ...
-    'channel_11', 'channel_12'}; 
+    'channel_11', 'channel_12'};
 rawEdited = j.run(raw);
-% raw_editedConditions= j.run(raw); 
+% raw_editedConditions= j.run(raw);
 % raw_editedDurations= nirs.design.change_stimulus_duration(raw_editedConditions, 'channel_2', 4);
 
 
@@ -32,26 +32,26 @@ durationCondition10= 2;
 durationCondition11= 2;
 durationCondition12= 2;
 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_1', durationCondition1); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_2', durationCondition2); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_3', durationCondition3); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_5', durationCondition5); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_6', durationCondition6); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_7', durationCondition7); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_9', durationCondition9); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_10', durationCondition10); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_11', durationCondition11); 
-rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_12', durationCondition12); 
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_1', durationCondition1);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_2', durationCondition2);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_3', durationCondition3);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_5', durationCondition5);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_6', durationCondition6);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_7', durationCondition7);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_9', durationCondition9);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_10', durationCondition10);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_11', durationCondition11);
+rawEdited= nirs.design.change_stimulus_duration(rawEdited, 'channel_12', durationCondition12);
 
 
 %% Changed by Jessica from j = nirs.modules.RemoveStimless(j) to j = nirs.modules.RemoveStimless();
 %% Whenever a "job" j is run (like in line 15), is must be re-initialized as empty () insted of concatenated with the previous one (j)
-%% Then, you can concatenate them again (from line 52 and on) until you run it. 
-j = nirs.modules.RemoveStimless(); 
+%% Then, you can concatenate them again (from line 52 and on) until you run it.
+j = nirs.modules.RemoveStimless();
 j = nirs.modules.RenameStims( j );
 %%Changing stim conditions to normal names
 j.listOfChanges = {
-    'channel_1', 'Rest'; 
+    'channel_1', 'Rest';
     'channel_2', 'Cake';
     'channel_3', 'Wait';
     'channel_5', 'BlockNeg';
@@ -64,7 +64,7 @@ j.listOfChanges = {
 
 %%Or...changing stim conditions to block names
 % j.listOfChanges = {
-%     'channel_1', 'Block'; 
+%     'channel_1', 'Block';
 %     'channel_2', 'Block';
 %     'channel_3', 'Block';
 %     'channel_4', 'Block';
@@ -93,12 +93,12 @@ nirs.viz.TimeSeriesViewer( hb )
 demographics = nirs.createDemographicsTable(raw);
 %% makes sure numbers match your sample (e.g. 10 if 10 total scans)
 for idx=1:2:6
-    
+
 
     rawEdited(idx).demographics('session')=0;   % making this numeric allows us to use it as a regressor
     rawEdited(idx+1).demographics('session')=1; % otherwise strings will be catagorical
-   
-    
+
+
 end
 %% subject level
 j = nirs.modules.AR_IRLS();
@@ -134,4 +134,3 @@ j.include_diagnostics=true;
 G= j.run (S);
 
 G.draw('tstat',[-5 5],'p<0.05');
-
