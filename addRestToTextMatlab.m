@@ -34,9 +34,13 @@ function addRest()
 %      dlmwrite(char(curEVTfile),fstRest)
       %% KNOWN BUG, makes output into one HUGE number. This is not the format prefed by anyone and everyone
 %      dlmwrite(char(curEVTfile),oGEVT,'-append',' ')
-      comboEVT = vertcat(restTrig, oGEVT)
+      comboEVT = array2table(vertcat(restTrig, oGEVT));
       disp(evtFilePath(n))
-      writetable(comboEVT,char(evtFilePath(n)))
+      curTableName = sprintf('eventfile%i.txt',n);
+      writetable(comboEVT,curTableName)
+      movefile(curTableName,char(evtFilePath(n)))
+      %ALMOST THERE!!! making it a table adds the problem of it having
+      %headings now... need to get rid of those
     end
 
   end
