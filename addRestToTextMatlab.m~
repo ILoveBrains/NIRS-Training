@@ -31,8 +31,8 @@ function addRest()
       disp('There is no rest')
       fstRest = sprintf('%s',restTrig);
       curEVTf = char(evtFilePath(n));
-      [~,name,ext] = fileparts(char(evtFilePath(n)))
-      fSavName = strcat(name,ext);
+      [filepath,name,ext] = fileparts(file)
+
 %      dlmwrite(char(curEVTfile),fstRest)
       %% KNOWN BUG, makes output into one HUGE number. This is not the format prefed by anyone and everyone
 %      dlmwrite(char(curEVTfile),oGEVT,'-append',' ')
@@ -52,7 +52,7 @@ function addRest()
 %       find_and_replace(evtFilePath,'    ',' ')
         curEVTf = load(curEVTf);
         comboEVT = vertcat(restTrig,curEVTf);
-        dlmwrite(fSavName,comboEVT,' ');
+        dlmwrite(evtFilePath(n),comboEVT,' ');
     end
 
   end
