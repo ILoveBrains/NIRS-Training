@@ -4,6 +4,7 @@
 function addRest()
   %Set path to folder on your current computer
 %   if isempty(fPath)
+  curDir = cd;
   fPath =  '/Users/erikarnold/Downloads';
 %   end
   restTrig = [0 0 1 1 0 0 0 0 0];
@@ -31,7 +32,7 @@ function addRest()
       disp('There is no rest')
       fstRest = sprintf('%s',restTrig);
       curEVTf = char(evtFilePath(n));
-      [~,name,ext] = fileparts(char(evtFilePath(n)))
+      [~,name,ext] = fileparts(char(evtFilePath(n)));
       fSavName = strcat(name,ext);
 %      dlmwrite(char(curEVTfile),fstRest)
       %% KNOWN BUG, makes output into one HUGE number. This is not the format prefed by anyone and everyone
@@ -53,6 +54,8 @@ function addRest()
         curEVTf = load(curEVTf);
         comboEVT = vertcat(restTrig,curEVTf);
         dlmwrite(fSavName,comboEVT,' ');
+        fileMoveName = strcat(name,ext);
+        movefile(fileMoveName,fileparts(char(evtFilePath(n))))
     end
 
   end
