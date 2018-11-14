@@ -6,39 +6,44 @@
 %timing should be taking the time of the event and adding or subtracting
 %% FORMAT FOR EVENTS
 % Time EventMarker Frame
-function [eventsOut]=eventProcessing(events,evtMark2Add,timing,firstEvent,samplingRate)
+function [eventsOut]=eventProcessing(events,evtMarkBase,timing,evCode2Add,firstEventOnly,samplingRate)
 outEventAry = [];
-%Checks to see if there are two inputs, the second is used as the second
+%Checks to see if there are two inputs in events, the second is used as the second
 %mark
-if length(evtMark2Add) == 2
+if length(evtMarkBase) == 2
     secMarkYes = 1;
 end
 %is the problem just at the begining of the code?
-if firstEvent == 1
+if firstEventOnly == 1
     fLine = events(:,1);
+    %Crate the time for the new event
     fEvTimeAdd = fLine(1) + timing;
     %Create the first event to add before everything else
-    fEventAdd = sprintf('%d %d %d',fEvTimeAdd,evtMark2Add,round(fEvTimeAdd/samplingRate));
+    fEventAdd = sprintf('%d %d %d',fEvTimeAdd,evCode2Add,round(fEvTimeAdd/samplingRate));
     eventsOut = vertcat(fEventAdd,events);
+else    
     for i = 1:length(events)
         curLine = events(:,i);
         nextLine = events(:,i+1);
         %write current line
+        
         % check if this is the first marker event
         if curLine == evtMark
             %add in the event
             %Check if you want to check the next event
             if secMarkYes == 1
                 if nextLine == Mark2
-
+                    fEvTimeAdd = fLine(1) + timing;
+                    fEventAdd = sprintf('%d %d %d',fEvTimeAdd,evCode2Add,round(fEvTimeAdd/samplingRate));
+                    outEventAry = vertcat(outEventAry,event2add); %#ok<*AGROW>
                 end
             %If you dont need a second marker    
             else
-               outEventAry = vertcat(outEventAry,event2add); %#ok<AGROW>
+               outEventAry = vertcat(outEventAry,event2add); 
             end    
         else
             %Add the curline to output
-            outEventAry = vertcat(outEventAry,curLine); %#ok<AGROW>
+            outEventAry = vertcat(outEventAry,curLine);
         end
     end    
 end
