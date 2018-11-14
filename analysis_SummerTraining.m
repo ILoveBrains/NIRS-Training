@@ -2,7 +2,7 @@ clear
 
 %% load
 
-root = 'C:\Users\Adam\Documents\MATLAB\LEAF data';
+root = '/Users/erikarnold/Downloads';
 raw  = nirs.io.loadDirectory( [root filesep 'Summer Training'], {'subject', 'scan'} );
 %% preprocessing
 

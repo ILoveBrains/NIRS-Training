@@ -6,7 +6,7 @@ function addRest()
   curDir = cd;
   fPath =  '/Users/erikarnold/Downloads';
 %   end
-  restTrig = [0 0 1 1 0 0 0 0 0];
+  restTrig = [1 0 1 1 0 0 0 0 0];
   %finds all the .evt file locations
   evtFilePath = rdir(fullfile(fPath,'*/','**/','*/','*.evt'));
   %Only keeps the path to the evt files
@@ -25,7 +25,7 @@ function addRest()
     fstEVT = strcat(num2str(fstEVT(2)),num2str(fstEVT(3)),num2str(fstEVT(4)),num2str(fstEVT(5)));
     %if there is no rest event at the begining
     if strcmp(fstEVT,'0110')
-        disp ('there is a rest')
+      disp ('there is a rest')
     else
       %print the output to a text file with the rest condition first (CURRENTLY STARTING AT 0)
       disp('There is no rest')
