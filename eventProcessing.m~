@@ -5,15 +5,14 @@
 
 %timing should be taking the time of the event and adding or subtracting
 
-%need to add in parseHDR file
-
+%
 %% FORMAT FOR EVENTS
 % Time EventMarker Frame
 function [eventsOut]=eventProcessing(events,evtMarkBase,timing,evCode2Add,firstEventOnly,samplingRate)
 outEventAry = [];
 %Checks to see if there are two inputs in events, the second is used as the second
 %mark
-%eventsOut = ClassName.empty(length(events),width(events));
+eventsOut = ClassName.empty(length(events),width(events));
 if length(evtMarkBase) == 2
     secMarkYes = 1;
 end
