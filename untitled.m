@@ -1,0 +1,3 @@
+sampleRate =
+posBlock =
+negBlock =

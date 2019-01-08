@@ -1,5 +1,3 @@
-clear
-
 %% load
 
 root = '/Users/erikarnold/Downloads';

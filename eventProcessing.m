@@ -7,6 +7,10 @@
 
 %need to add in parseHDR file
 
+%there is the wrong trigger present (need to delete it)
+
+%missing rest event in the middle of the with the miss code
+
 %% FORMAT FOR EVENTS
 % Time EventMarker Frame
 function [eventsOut]=eventProcessing(events,evtMarkBase,timing,evCode2Add,firstEventOnly,samplingRate)
@@ -25,7 +29,7 @@ if firstEventOnly == 1
     %Create the first event to add before everything else
     fEventAdd = sprintf('%d %d %d',fEvTimeAdd,evCode2Add,round(fEvTimeAdd/samplingRate));
     eventsOut = vertcat(fEventAdd,events);
-else    
+else
     for i = 1:length(events)
         curLine = events(:,i);
         nextLine = events(:,i+1);
@@ -33,6 +37,7 @@ else
         
         % check if this is the first marker event
         if curLine == evtMark
+            
             %add in the event
             %Check if you want to check the next event
             if secMarkYes == 1
